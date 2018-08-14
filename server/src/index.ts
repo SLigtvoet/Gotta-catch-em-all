@@ -12,6 +12,7 @@ import * as socketIoJwtAuth from 'socketio-jwt-auth'
 import {secret} from './jwt'
 import PokemonController from './controllers/pokemon';
 import TrainerController from './controllers/trainer';
+import GameController from './games/controller';
 
 const app = new Koa()
 const server = new Server(app.callback())
@@ -23,6 +24,7 @@ useKoaServer(app, {
   controllers: [
     UserController,
     LoginController,
+    GameController,
     PokemonController,
     TrainerController
   ],

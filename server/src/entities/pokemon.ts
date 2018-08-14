@@ -22,7 +22,7 @@ export default class Pokemon extends BaseEntity{
     @Column('text')
     imagePokemon: string = `../images/${this.name}.png`
 
-    @ManyToOne(_ => Trainer, trainer => trainer.pokemon)
-    trainer: Trainer
+    @ManyToOne(_ => Trainer, trainer => trainer.pokemons)
+    trainer: Trainer;
 
 }

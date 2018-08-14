@@ -21,7 +21,6 @@ export default class Trainer extends BaseEntity{
     imageTrainer: string
 
     @OneToMany(_ => Pokemon, pokemon => pokemon.trainer)
-    pokemon: Pokemon
-
+    pokemons: Pokemon[]
 
 }
