@@ -1,4 +1,6 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import Pokemon from "./pokemon";
+
 
 @Entity()
 export default class Trainer extends BaseEntity{
@@ -18,6 +20,8 @@ export default class Trainer extends BaseEntity{
     @Column('text')
     imageTrainer: string
 
-    @Column('json')
-    pokemon: string[]
+    @OneToMany(_ => Pokemon, pokemon => pokemon.trainer)
+    pokemon: Pokemon
+
+
 }

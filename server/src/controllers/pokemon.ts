@@ -1,4 +1,4 @@
-import { JsonController, Get, Patch, Param, Body, NotFoundError, Post } from "routing-controllers";
+import { JsonController, Get, Patch, Param, Body, NotFoundError, Post, BodyParam } from "routing-controllers";
 import Pokemon from "../entities/pokemon";
 
 @JsonController()
@@ -12,8 +12,15 @@ export default class PokemonController {
 
 
     @Post('/pokemon')
-    async newPokemon(){
+    async newPokemon(
+        @BodyParam('name', {required: true}) name: string,
+        @BodyParam('type', {required: true}) type: string,
+        @BodyParam('attacks', {required: true}) attacks: string[],
+    ){
         const pokemon = await Pokemon.create()
+        pokemon.name = name
+        pokemon.type = type
+        pokemon.attacks = attacks
         return pokemon.save()
     }
 

@@ -3,7 +3,6 @@ import { Action, BadRequestError, useKoaServer } from 'routing-controllers'
 import setupDb from './db'
 import UserController from './users/controller'
 import LoginController from './logins/controller'
-import GameController from './games/controller'
 import { verify } from './jwt'
 import User from './users/entity'
 import * as Koa from 'koa'
@@ -11,6 +10,8 @@ import {Server} from 'http'
 import * as IO from 'socket.io'
 import * as socketIoJwtAuth from 'socketio-jwt-auth'
 import {secret} from './jwt'
+import PokemonController from './controllers/pokemon';
+import TrainerController from './controllers/trainer';
 
 const app = new Koa()
 const server = new Server(app.callback())
@@ -22,7 +23,8 @@ useKoaServer(app, {
   controllers: [
     UserController,
     LoginController,
-    GameController
+    PokemonController,
+    TrainerController
   ],
   authorizationChecker: (action: Action) => {
     const header: string = action.request.headers.authorization

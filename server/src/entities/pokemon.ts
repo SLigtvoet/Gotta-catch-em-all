@@ -1,4 +1,5 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import Trainer from "./trainer";
 
 @Entity()
 export default class Pokemon extends BaseEntity{
@@ -13,11 +14,15 @@ export default class Pokemon extends BaseEntity{
     type: string
 
     @Column('text')
-    health: number
+    health: number = 100
 
-    @Column('text')
+    @Column('json')
     attacks: string[]
 
     @Column('text')
-    imagePokemon: string
+    imagePokemon: string = `../images/${this.name}.png`
+
+    @ManyToOne(_ => Trainer, trainer => trainer.pokemon)
+    trainer: Trainer
+
 }
